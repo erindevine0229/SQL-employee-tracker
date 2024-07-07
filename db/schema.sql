@@ -1,6 +1,8 @@
 DROP DATABASE IF EXISTS employees;
 CREATE DATABASE employees_db;
 
+\c employees_db;
+
 DROP TABLE IF EXISTS departments;
 
 CREATE TABLE departments (
@@ -29,7 +31,7 @@ CREATE TABLE employees (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INTEGER NOT NULL,
-    manager_id INTEGER NOT NULL,
+    manager_id INTEGER,
     FOREIGN KEY (role_id)
     REFERENCES roles(id)
     ON DELETE SET NULL

@@ -20,5 +20,23 @@ const selectArray = [
 
 inquirer.prompt(selectArray);
 .then(answers) => {
-    
+    switch (answers.selections) {
+        case 'View All Departments'
+
+        case 'View All Roles'
+
+        case 'View All Employees'
+        
+        case 'Add a Department'
+
+        case 'Add a Role'
+
+        case 'Add an Employee'
+
+        case 'Update an Employee Role'
+
+        default
+
+    };
+
 }
