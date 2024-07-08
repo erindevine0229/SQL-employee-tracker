@@ -22,21 +22,51 @@ inquirer.prompt(selectArray);
 .then(answers) => {
     switch (answers.selections) {
         case 'View All Departments'
-
+           viewAllDepts();
+           break;
         case 'View All Roles'
-
+            viewAllRoles();
+            break;
         case 'View All Employees'
-        
+            viewAllEmployees();
+            break;
         case 'Add a Department'
-
+            addDept();
+            break;
         case 'Add a Role'
-
+            addRole();
+            break;
         case 'Add an Employee'
-
+            addEmployee();
+            break;
         case 'Update an Employee Role'
-
+            updateEmployeeRole();
+            break;
         default
+            return;
 
     };
 
 }
+
+
+
+function viewAllDepts () {
+    db.query()
+};
+
+function viewAllRoles () {
+    db.query()
+};
+
+function viewAllEmployees () {
+    db.query()
+};
+
+function addDept () {};
+
+function addRole () {};
+
+function addEmployee () {};
+
+function updateEmployeeRole () {};
