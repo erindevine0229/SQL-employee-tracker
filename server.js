@@ -3,6 +3,14 @@ const inquirer = require('inquirer');
 const { Pool } = require('pg');
 
 
+const pool = new Pool({
+user: DB_USER,
+host: 'localhost',
+database: DB_NAME,
+password: DB_PASSWORD,
+port: 5432,
+});
+
 const selectArray = [
     {
         type: 'list',
@@ -53,8 +61,8 @@ inquirer.prompt(selectArray);
 
 
 function viewAllDepts () {
-    db.query(
-        `SELECT * FROM departments`,
+    pool.query(
+        'SELECT * FROM departments',
         (err, results) => {
             if (err) {
                 console.error("There was an error loading data", err);
@@ -65,8 +73,8 @@ function viewAllDepts () {
 };
 
 function viewAllRoles () {
-    db.query(
-        `SELECT * FROM roles`,
+    pool.query(
+        'SELECT * FROM roles',
         (err, results) => {
             if (err) {
                 console.error("There was an error loading data", err);
@@ -77,7 +85,16 @@ function viewAllRoles () {
 };
 
 function viewAllEmployees () {
-    db.query()
+    pool.query(
+        'SELECT * FROM employees',
+        (err, results) => {
+            if(err) {
+                console.error("There was an error loading the data", err);
+                return;
+            }
+            console.log(results);
+        }
+    )
 };
 
 function addDept () {
