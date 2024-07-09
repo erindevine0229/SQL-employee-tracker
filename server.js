@@ -87,13 +87,71 @@ function addDept () {
             name: 'dept',
             message: 'Please enter new department you wish to add.'
         }
-    ]).then(response) => {
+    ])
+    .then(response) => {
         `INSERT INTO departments (name) VALUES`
     }
 };
 
-function addRole () {};
+function addRole () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'Enter the title for this new role:'
+        },
 
-function addEmployee () {};
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Enter the salary for new role:'
+
+        },
+
+        {
+            type: 'input',
+            name: 'dept',
+            message: 'Enter the corresponding department id for new role:'
+
+        },
+    ])
+    .then((response) => {
+
+    }
+};
+
+function addEmployee () {
+
+
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first',
+            message: 'Enter new employee first name:'
+        },
+
+        {
+            type: 'input',
+            name: 'last',
+            message: 'Enter new employee last name:'
+        },
+
+        {
+            type: 'input',
+            name: 'role',
+            message: 'Enter the role ID for new employee role:'
+        },
+
+        {
+            type: 'input',
+            name: 'manager',
+            message: 'Enter the manager ID for the new employee manager'
+        },
+
+    ])
+    .then((response) => {
+        
+    }
+};
 
 function updateEmployeeRole () {};
