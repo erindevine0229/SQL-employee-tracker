@@ -1,5 +1,6 @@
 const connect = require('./config/connection.js');
 const inquirer = require('inquirer');
+const { Pool } = require('pg');
 
 
 const selectArray = [
@@ -52,18 +53,44 @@ inquirer.prompt(selectArray);
 
 
 function viewAllDepts () {
-    db.query()
+    db.query(
+        `SELECT * FROM departments`,
+        (err, results) => {
+            if (err) {
+                console.error("There was an error loading data", err);
+                return;
+            }
+            console.log(results);
+})
 };
 
 function viewAllRoles () {
-    db.query()
+    db.query(
+        `SELECT * FROM roles`,
+        (err, results) => {
+            if (err) {
+                console.error("There was an error loading data", err);
+                return;
+            }
+            console.log(results);
+})  
 };
 
 function viewAllEmployees () {
     db.query()
 };
 
-function addDept () {};
+function addDept () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'dept',
+            message: 'Please enter new department you wish to add.'
+        }
+    ]).then(response) => {
+        `INSERT INTO departments (name) VALUES`
+    }
+};
 
 function addRole () {};
 
