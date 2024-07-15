@@ -1,23 +1,8 @@
-// Access environment variables from .env file
-require('dotenv').config();
 
-// Require inquirer and postgres packages as well as connect to the connections.js file
-const connect = require('./config/connection.js');
+// Connect to the connections.js file to avail the pool.query functionality from postgres
+const pool = require('./config/connection.js');
+//  Require inquirer package via npm
 const inquirer = require('inquirer');
-const { Pool } = require('pg');
-
-// Access environment variables from .env file
-require('dotenv').config();
-
-// Utilize process.env to pull in this information
-const pool = new Pool({
-user: process.env.DB_USER,
-host: 'localhost',
-database: process.env.DB_NAME,
-password: process.env.DB_PASSWORD,
-// Typical Postgres port
-port: 5432,
-});
 
 // Create array to store options for inquirer prompting in order to determine what the user wants to do with the database (serve as main menu options)
 const selectArray = [
@@ -74,7 +59,7 @@ const mainFunction = () => {
 
 function viewAllDepts () {
     pool.query(
-        'SELECT * FROM departments', (err, results) => {
+        'SELECT departments.id, departments.name, roles.title AS role_title FROM departments INNER JOIN roles ON departments.id = roles.department_id', (err, results) => {
             if (err) {
                 console.error("There was an error loading data", err);
                 return;
@@ -85,7 +70,7 @@ function viewAllDepts () {
 
 function viewAllRoles () {
     pool.query(
-        'SELECT * FROM roles', (err, results) => {
+        'SELECT roles.id, roles.title, roles.salary, departments.name AS departments_name FROM roles INNER JOIN departments ON roles.department_id = departments.id', (err, results) => {
             if (err) {
                 console.error("There was an error loading data", err);
                 return;
@@ -96,7 +81,7 @@ function viewAllRoles () {
 
 function viewAllEmployees () {
     pool.query(
-        'SELECT * FROM employees',
+        'SELECT employees.id, employees.first_name, employees.last_name, roles.title AS role_tite FROM employees INNER JOIN roles ON employees.role_id = roles.id',
         (err, results) => {
             if(err) {
                 console.error("There was an error loading the data", err);
