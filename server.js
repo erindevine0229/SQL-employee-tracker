@@ -21,6 +21,7 @@ const selectArray = [
     },
 ];
 
+// Create a main function to house the available options for actions
 const mainFunction = () => {
 
     inquirer.prompt(selectArray)
@@ -56,7 +57,7 @@ const mainFunction = () => {
     };
 
 
-
+// This function will display the id and name information for all departments within the database
 function viewAllDepts () {
     pool.query(
         'SELECT departments.id, departments.name, roles.title AS role_title FROM departments INNER JOIN roles ON departments.id = roles.department_id', (err, results) => {
@@ -68,6 +69,7 @@ function viewAllDepts () {
 })
 };
 
+// This function will display the id, title, department name  and salary information for all roles in the database
 function viewAllRoles () {
     pool.query(
         'SELECT roles.id, roles.title, roles.salary, departments.name AS departments_name FROM roles INNER JOIN departments ON roles.department_id = departments.id', (err, results) => {
@@ -79,6 +81,7 @@ function viewAllRoles () {
 })  
 };
 
+// This function will display the id, first name, last name, job title, department, salary and manager for each employee
 function viewAllEmployees () {
     pool.query(
         'SELECT employees.id, employees.first_name, employees.last_name, roles.title AS role_tite FROM employees INNER JOIN roles ON employees.role_id = roles.id',
@@ -92,6 +95,7 @@ function viewAllEmployees () {
     )
 };
 
+// This function will take user input (via inquirer prompt) for a new department title and will add this new info to the departments table as a new entry
 function addDept () {
     inquirer.prompt([
         {
@@ -112,6 +116,7 @@ function addDept () {
     });
 };
 
+// This function will take the user input (via inquirer prompt) for a new role's title, salary and department and will add this infor into the roles table as a new entry
 function addRole () {
     inquirer.prompt([
         {
@@ -147,6 +152,7 @@ function addRole () {
     });
 };
 
+// This function will take user input (via inquirer prompt) regarding the first and last names, the role ID and manager ID for a new employee and create a new entry within the employees table
 function addEmployee () {
 
 
@@ -189,6 +195,7 @@ function addEmployee () {
     });
 };
 
+// This function will select an existing employee based on their id and will then update their role information based on a new role id. This will update the employee's entry in the database
 function updateEmployeeRole () {
     inquirer.prompt([
         {
