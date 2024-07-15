@@ -14,5 +14,5 @@ password: process.env.DB_PASSWORD,
 port: 5432,
 });
 
-
+// Export for use in the server.js
 module.exports = pool;
