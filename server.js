@@ -4,6 +4,8 @@ const pool = require('./config/connection.js');
 //  Require inquirer package via npm
 const inquirer = require('inquirer');
 
+
+
 // Create array to store options for inquirer prompting in order to determine what the user wants to do with the database (serve as main menu options)
 const selectArray = [
     {
@@ -20,6 +22,8 @@ const selectArray = [
         ]
     },
 ];
+
+
 
 // Create a main function to house the available options for actions
 const mainFunction = () => {
@@ -56,6 +60,9 @@ const mainFunction = () => {
         });
     };
 
+    console.log('Welcome to Employee Manager. What would you like to do?')
+    mainFunction();
+
 
 // This function will display the id and name information for all departments within the database
 function viewAllDepts () {
@@ -84,7 +91,7 @@ function viewAllRoles () {
 // This function will display the id, first name, last name, job title, department, salary and manager for each employee
 function viewAllEmployees () {
     pool.query(
-        'SELECT employees.id, employees.first_name, employees.last_name, roles.title AS role_tite FROM employees INNER JOIN roles ON employees.role_id = roles.id',
+        `SELECT employees.id, employees.first_name, employees.last_name, roles.title AS role_tite FROM employees INNER JOIN roles ON employees.role_id = roles.id`,
         (err, results) => {
             if(err) {
                 console.error("There was an error loading the data", err);
