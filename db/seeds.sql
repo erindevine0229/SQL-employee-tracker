@@ -1,9 +1,9 @@
 -- Insert values into departments tables based on specified required fields
-INSERT INTO department (name)
-VALUES  ('Sales')
+INSERT INTO departments (name)
+VALUES  ('Sales'),
         ('Engineering'),
         ('Finance'),
-        ('Legal'),
+        ('Legal');
 
 -- Insert values into roles tables based on specified required fields
 INSERT INTO roles (title, salary, department_id)

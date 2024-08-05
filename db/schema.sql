@@ -1,9 +1,9 @@
 -- drop any existing db with this name and set up new database
-ROP DATABASE IF EXISTS employees;
-CREATE DATABASE employees_db;
+DROP DATABASE IF EXISTS workforce_db;
+CREATE DATABASE workforce_db;
 
 --  Connect to the db in order to manipulate it
-USE employees_db;
+\c workforce_db;
 
 -- error handling to delete any existing table of same name prior to proceeding
 DROP TABLE IF EXISTS departments;
@@ -23,7 +23,7 @@ CREATE TABLE roles (
     department_id INTEGER NOT NULL,
     -- tie this foreign key to reference the id information from the departments table
     FOREIGN KEY (department_id)
-    REFERENCES department(id)
+    REFERENCES departments(id)
     ON DELETE SET NULL
 
 );
@@ -43,6 +43,6 @@ CREATE TABLE employees (
     -- tie this foreign key to another employee in the table in order to assign a manager
     FOREIGN KEY (manager_id)
     REFERENCES employees(id)
-    ON DELETE SET NULL;
+    ON DELETE SET NULL
 
 );
