@@ -70,7 +70,11 @@ function viewAllDepts() {
 
 // This function will display the id, title, department name  and salary information for all roles in the database
 function viewAllRoles() {
-    pool.query('SELECT id, title, department_id, salary FROM roles', (err, result) => {
+    pool.query(`
+        SELECT roles.id, roles.title, departments.name AS department_name, roles.salary
+        FROM roles
+        LEFT JOIN departments ON roles.department_id = departments.id
+    `, (err, result) => {
         if (err) {
             console.error(err);
         } else {
@@ -82,12 +86,17 @@ function viewAllRoles() {
 
 // This function will display the id, first name, last name, job title, department, salary and manager for each employee
 function viewAllEmployees() {
-    pool.query('SELECT id, first_name, last_name, role_id, manager_id FROM employees', (err, result) => {
+    pool.query(`
+        SELECT employees.id, employees.first_name, employees.last_name, roles.title AS role, departments.name AS department, roles.salary, CONCAT(managers.first_name, ' ', managers.last_name) AS manager
+        FROM employees
+        LEFT JOIN roles ON employees.role_id = roles.id
+        LEFT JOIN departments ON roles.department_id = departments.id
+        LEFT JOIN employees AS managers ON employees.manager_id = managers.id
+    `, (err, result) => {
         if (err) {
             console.error(err);
         } else {
-            const dataWithoutIndex = result.rows.map(({ id, first_name, last_name, role_id, manager_id }) => ({ ID: id, First_Name: first_name, Last_Name: last_name, Role_ID: role_id, Manager_ID: manager_id }));
-            console.table(dataWithoutIndex, ['ID', 'First_Name', 'Last_Name', 'Role_ID', 'Manager_ID']);
+            console.table(result.rows, ['id', 'first_name', 'last_name', 'role', 'department', 'salary', 'manager']);
         }
         mainFunction();
     });
