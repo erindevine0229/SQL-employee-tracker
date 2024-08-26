@@ -1,7 +1,8 @@
 # SQL-employee-tracker
 
 ## Description
-  This is a CLI based application used to 
+  This is a CLI based application used to track and uodate an employee database. A user can view departments, roles and employees and is able to update, add or delete these categories as well.
+  
 ## Installation
   Be sure to install npm packages first. To use this program, run the command node index.js and interact through the terminal/command line. Inquirer.js is used to allow the client to select from several options to maintain their employee/workpace database. A user can view tables containing existing departments, roles and employees. They are also able to create a new department, role or employee which will be stored in the database. An employee's role can also be updated using this application. 
   
